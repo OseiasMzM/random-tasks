@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService, template } from './service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'random-tasks';
+
+  constructor(private service: ApiService) {  }
+
+  tarefa : template = { activity: '', type: ''};
+
+  cliquei() {
+    this.service.callapi().subscribe( ( retorno ) => {
+      this.tarefa = retorno; 
+      console.log(this.tarefa);
+    });
+  }
 }
